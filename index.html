@@ -1,159 +1,337 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>James Murimi | Portfolio</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #222;
-    }
-    header {
-      background: #111;
-      color: #fff;
-      padding: 60px 20px;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 40px;
-    }
-    header p {
-      font-size: 18px;
-      opacity: 0.8;
-    }
-    section {
-      padding: 40px 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-    .section-title {
-      font-size: 28px;
-      margin-bottom: 20px;
-      border-left: 5px solid #111;
-      padding-left: 10px;
-    }
-    .about {
-      font-size: 18px;
-      line-height: 1.6;
-    }
-    .skills-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .skill {
-      background: #111;
-      color: #fff;
-      padding: 10px 18px;
-      border-radius: 20px;
-      font-size: 15px;
-    }
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-    .project-card {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    .project-card h3 {
-      margin-top: 0;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #111;
-      color: #fff;
-      margin-top: 40px;
-    }
-  </style>
-</head>
-<body>
+import React, { useState, useEffect } from "react";
+import { Mail, Download, Moon, Sun, Github, Linkedin, Globe } from "lucide-react";
+import { motion } from "framer-motion";
 
-<header>
-  <h1>James Murimi</h1>
-  <p>IT Specialist • Cybersecurity • Systems & Software Consultant</p>
-</header>
+// This single-file React component is designed as a production-ready portfolio shell
+// - Uses Tailwind CSS classes (assumes Tailwind is configured in the project)
+// - Uses Framer Motion for subtle animations
+// - Uses lucide-react for icons
+// - Exports a default component that can be used as the main App or a page
 
-<section>
-  <h2 class="section-title">About Me</h2>
-  <p class="about">
-    I am James Murimi, an IT Specialist with experience in systems implementation, cybersecurity, software support, cloud, servers, and network technologies. I build solutions, secure systems, solve problems, and help businesses grow through technology.
-  </p>
-</section>
+export default function Portfolio() {
+  const [dark, setDark] = useState(false);
+  useEffect(() => {
+    const root = document.documentElement;
+    if (dark) root.classList.add("dark");
+    else root.classList.remove("dark");
+  }, [dark]);
 
-<section>
-  <h2 class="section-title">Skills</h2>
-  <div class="skills-list">
-    <div class="skill">Cybersecurity</div>
-    <div class="skill">Linux (Ubuntu)</div>
-    <div class="skill">Servers & Networking</div>
-    <div class="skill">System Implementation</div>
-    <div class="skill">Cloud Solutions</div>
-    <div class="skill">Python</div>
-    <div class="skill">MySQL</div>
-    <div class="skill">Nginx</div>
-  </div>
-</section>
+  const skills = [
+    "Cybersecurity",
+    "Linux (Ubuntu)",
+    "Server Administration",
+    "Nginx & MySQL",
+    "Cloud Infrastructure",
+    "Automation & Scripting (Python)",
+    "System Integrations",
+    "DevOps Basics",
+  ];
 
-<section>
-  <h2 class="section-title">Projects</h2>
-  <div class="projects">
-    <div class="project-card">
-      <h3>SmartHealth Implementation</h3>
-      <p>System integrations, deployments, uptime management and client success across multiple hospitals.</p>
+  const projects = [
+    {
+      id: "smarthealth",
+      title: "SmartHealth Implementation",
+      summary:
+        "End-to-end implementation and integrations for hospital systems: pharmacy, HR, accounting and uptime monitoring.",
+      tags: ["Integration", "Healthcare", "Uptime"],
+      link: "https://github.com/Nevricks/SmartHealth",
+    },
+    {
+      id: "janella",
+      title: "Janella Hospital Implementation",
+      summary: "Deployment, staff training and optimization of the SmartHealth stack for Janella Hospital.",
+      tags: ["Deployment", "Training", "Optimization"],
+      link: "https://github.com/Nevricks/Janella-Work",
+    },
+    {
+      id: "nevricks",
+      title: "Nevricks Inc Website",
+      summary: "Consultancy website with portfolio, services and contact automation for a 24/7 tech consultancy.",
+      tags: ["Website", "Consultancy", "Branding"],
+      link: "https://nevricks.example.com",
+    },
+    {
+      id: "cyberblog",
+      title: "Syria.com Cybersecurity Blog",
+      summary: "Long-form articles and quick advisories about modern cyber threats and defensive measures.",
+      tags: ["Content", "Security", "Awareness"],
+      link: "https://syria.com",
+    },
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+      <header className="max-w-6xl mx-auto p-6 flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-600 to-pink-500 flex items-center justify-center text-white font-bold shadow-lg">JM</div>
+          <div>
+            <h1 className="text-xl font-semibold">James Murimi</h1>
+            <p className="text-sm opacity-70">IT Specialist • Cybersecurity • Systems & Software Consultant</p>
+          </div>
+        </div>
+
+        <nav className="flex items-center gap-4">
+          <a href="#projects" className="text-sm hover:underline">Projects</a>
+          <a href="#skills" className="text-sm hover:underline">Skills</a>
+          <a href="#contact" className="text-sm hover:underline">Contact</a>
+
+          <button
+            aria-label="toggle theme"
+            onClick={() => setDark((d) => !d)}
+            className="ml-4 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition"
+          >
+            {dark ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+
+          <a
+            href="/Murimi-CV.pdf"
+            download
+            className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 rounded-md text-sm shadow"
+          >
+            <Download size={16} />
+            CV
+          </a>
+        </nav>
+      </header>
+
+      <main className="max-w-6xl mx-auto px-6">
+        {/* Hero */}
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center my-8">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="md:col-span-2"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold leading-tight">
+              I build reliable systems & secure infrastructure for healthcare and enterprise.
+            </h2>
+            <p className="mt-4 text-lg opacity-80">
+              I'm a systems implementor and cybersecurity practitioner with experience deploying large-scale healthcare systems,
+              automating servers, and helping teams stay online and secure.
+            </p>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a href="#contact" className="px-5 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md shadow">Hire / Contract</a>
+              <a href="#projects" className="px-5 py-3 border border-gray-300 dark:border-gray-700 rounded-md">View Projects</a>
+            </div>
+
+            <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <StatCard label="Years Experience" value="6+" />
+              <StatCard label="Uptime Maintained" value= "99.7%" />
+              <StatCard label="Projects" value="30+" />
+              <StatCard label="Happy Clients" value="20+" />
+            </div>
+          </motion.div>
+
+          <motion.aside
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            className="rounded-xl bg-white dark:bg-gray-800 p-6 shadow-lg"
+          >
+            <h3 className="text-lg font-semibold">Contact Snapshot</h3>
+            <p className="mt-2 text-sm opacity-80">Fastest way to reach me:</p>
+
+            <div className="mt-4 flex flex-col gap-2">
+              <a className="flex items-center gap-3" href="mailto:murimijames45@gmail.com">
+                <Mail size={16} />
+                <span className="text-sm">murimijames45@gmail.com</span>
+              </a>
+
+              <div className="flex items-center gap-3">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17 3H7a2 2 0 00-2 2v14l4-3h8a2 2 0 002-2V5a2 2 0 00-2-2z"/></svg>
+                <span className="text-sm">Nairobi, Kenya</span>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span className="text-sm font-medium">Phone:</span>
+                <span className="text-sm opacity-80">0769 314 153</span>
+              </div>
+
+              <div className="pt-3 flex gap-3">
+                <a href="https://github.com/Nevricks" aria-label="github" className="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700">
+                  <Github size={18} />
+                </a>
+                <a href="https://linkedin.com/in/jamesmurimi" aria-label="linkedin" className="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700">
+                  <Linkedin size={18} />
+                </a>
+                <a href="https://nevricks.example.com" aria-label="website" className="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700">
+                  <Globe size={18} />
+                </a>
+              </div>
+            </div>
+          </motion.aside>
+        </section>
+
+        {/* Skills */}
+        <section id="skills" className="my-12">
+          <motion.h3 initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className="text-2xl font-semibold">Skills & Expertise</motion.h3>
+          <p className="mt-2 text-sm opacity-80">A quick overview of my technical toolkit and areas of focus.</p>
+
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {skills.map((s) => (
+              <div key={s} className="rounded-lg bg-white dark:bg-gray-800 p-4 shadow-sm">
+                <div className="text-sm font-medium">{s}</div>
+                <div className="mt-2 text-xs opacity-75">{skillBlurb(s)}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Projects */}
+        <section id="projects" className="my-12">
+          <motion.h3 initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className="text-2xl font-semibold">Featured Projects</motion.h3>
+          <p className="mt-2 text-sm opacity-80">Selected projects, contributions and case studies.</p>
+
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            {projects.map((p, idx) => (
+              <motion.article
+                key={p.id}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.08 }}
+                className="rounded-lg bg-white dark:bg-gray-800 p-6 shadow"
+              >
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h4 className="text-lg font-semibold">{p.title}</h4>
+                    <p className="mt-2 text-sm opacity-80">{p.summary}</p>
+
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {p.tags.map((t) => (
+                        <span key={t} className="text-xs px-2 py-1 rounded bg-gray-100 dark:bg-gray-700">{t}</span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex-shrink-0 ml-4 flex flex-col gap-2 items-end">
+                    <a href={p.link} target="_blank" rel="noreferrer" className="text-sm underline">View</a>
+                    <a href={`https://github.com/Nevricks/${p.id}`} target="_blank" rel="noreferrer" className="text-sm">Code</a>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </section>
+
+        {/* More: Testimonials + Process */}
+        <section className="my-12 grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2 rounded-lg bg-white dark:bg-gray-800 p-6 shadow">
+            <h3 className="text-xl font-semibold">Approach & Process</h3>
+            <p className="mt-3 text-sm opacity-80">I follow structured project phases that ensure success: Assessment → Plan → Implement → Train → Monitor</p>
+
+            <div className="mt-4 space-y-3">
+              <ProcessStep title="Assessment" desc="Stakeholder interviews, environment scans, and requirement gathering." />
+              <ProcessStep title="Implementation" desc="Phased roll-outs, thorough testing, and staff handover." />
+              <ProcessStep title="Monitoring" desc="Uptime checks, alerting, backups and continuous improvement." />
+            </div>
+          </div>
+
+          <div className="rounded-lg bg-white dark:bg-gray-800 p-6 shadow">
+            <h3 className="text-lg font-semibold">Testimonials</h3>
+            <blockquote className="mt-3 text-sm opacity-80">"James delivered our hospital rollout on time and with minimal disruption — exceptional work on training and stabilization." — Director, Janella Hospital</blockquote>
+          </div>
+        </section>
+
+        {/* Contact */}
+        <section id="contact" className="my-12 rounded-lg bg-white dark:bg-gray-800 p-6 shadow">
+          <h3 className="text-2xl font-semibold">Get in touch</h3>
+          <p className="mt-2 text-sm opacity-80">I’m available for freelance, contract, and full-time roles. Send a message and I’ll reply within 48 hours.</p>
+
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form
+              className="space-y-4"
+              action={`mailto:murimijames45@gmail.com`}
+              method="POST"
+              encType="text/plain"
+              onSubmit={() => alert("This form will open your email client. For a fully functional form we can wire a serverless endpoint or use Formspree.")}
+            >
+              <label className="block">
+                <span className="text-sm">Name</span>
+                <input name="name" required className="mt-1 block w-full rounded-md border-gray-200 dark:border-gray-700 bg-transparent p-2" />
+              </label>
+
+              <label className="block">
+                <span className="text-sm">Email</span>
+                <input type="email" name="email" required className="mt-1 block w-full rounded-md border-gray-200 dark:border-gray-700 bg-transparent p-2" />
+              </label>
+
+              <label className="block">
+                <span className="text-sm">Message</span>
+                <textarea name="message" rows={6} required className="mt-1 block w-full rounded-md border-gray-200 dark:border-gray-700 bg-transparent p-2" />
+              </label>
+
+              <div className="flex items-center gap-3">
+                <button type="submit" className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded">Send</button>
+                <a href="mailto:murimijames45@gmail.com" className="inline-flex items-center gap-2 px-3 py-2 border rounded">
+                  <Mail size={16} />
+                  Email directly
+                </a>
+              </div>
+            </form>
+
+            <div className="space-y-4">
+              <div className="rounded-lg p-4 border border-dashed border-gray-200 dark:border-gray-700">
+                <h4 className="font-semibold">Availability</h4>
+                <p className="text-sm opacity-80 mt-1">Open to contract & remote engagements — timezone: EAT (Nairobi).</p>
+              </div>
+
+              <div className="rounded-lg p-4">
+                <h4 className="font-semibold">Rates (indicative)</h4>
+                <p className="text-sm opacity-80 mt-1">Daily: KES 12,000 — Project: Depends on scope — Long-term: negotiable</p>
+              </div>
+
+              <div className="rounded-lg p-4">
+                <h4 className="font-semibold">Quick Links</h4>
+                <ul className="mt-2 space-y-2 text-sm">
+                  <li><a className="underline" href="https://github.com/Nevricks">GitHub</a></li>
+                  <li><a className="underline" href="https://linkedin.com/in/jamesmurimi">LinkedIn</a></li>
+                  <li><a className="underline" href="/Murimi-CV.pdf">Download CV</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer className="py-12 text-center opacity-80">© {new Date().getFullYear()} James Murimi — Built with care.</footer>
+      </main>
     </div>
+  );
+}
 
-    <div class="project-card">
-      <h3>Cybersecurity Blog (Syria.com)</h3>
-      <p>Articles on modern cyber threats, hacking activities, and security insights.</p>
+// Small helper components and utilities
+function StatCard({ label, value }) {
+  return (
+    <div className="rounded-lg p-4 bg-gray-100 dark:bg-gray-800">
+      <div className="text-sm opacity-75">{label}</div>
+      <div className="text-2xl font-semibold mt-1">{value}</div>
     </div>
+  );
+}
 
-    <div class="project-card">
-      <h3>Nevricks Inc</h3>
-      <p>Tech consultancy providing 24/7 support, cybersecurity audits, cloud & IT services.</p>
+function ProcessStep({ title, desc }) {
+  return (
+    <div className="flex items-start gap-4">
+      <div className="w-10 h-10 rounded-full bg-indigo-500 text-white flex items-center justify-center font-semibold">✓</div>
+      <div>
+        <div className="font-medium">{title}</div>
+        <div className="text-sm opacity-80">{desc}</div>
+      </div>
     </div>
-  </div>
-</section>
+  );
+}
 
-<footer>
-  © 2025 James Murimi — All Rights Reserved
-</footer>
-
-
-<section>
-  <h2 class="section-title">More Projects</h2>
-  <div class="projects">
-    <div class="project-card">
-      <h3>Janella Hospital Implementation</h3>
-      <p>Led deployment, training, uptime monitoring and system optimization.</p>
-    </div>
-    <div class="project-card">
-      <h3>SmartLinkPro Integrations</h3>
-      <p>Integration of payment, stock, equipment and accounting platforms.</p>
-    </div>
-    <div class="project-card">
-      <h3>Cloud & Server Automation</h3>
-      <p>Linux server setups, networking, Nginx, MySQL, backups & monitoring.</p>
-    </div>
-  </div>
-</section>
-
-<section>
-  <h2 class="section-title">Contact</h2>
-  <p class="about">
-    <strong>Email:</strong> murimijames45@gmail.com<br>
-    <strong>Phone:</strong> 0769 314 153<br>
-    <strong>Location:</strong> Nairobi, Kenya
-  </p>
-</section>
-
-</body>
-</html>
+function skillBlurb(skill) {
+  const map = {
+    "Cybersecurity": "Security assessments, incident handling, and hardening Linux servers.",
+    "Linux (Ubuntu)": "Server installs, user management, package automation and shell scripting.",
+    "Server Administration": "Nginx, MySQL, backups, monitoring and performance tuning.",
+    "Nginx & MySQL": "Reverse proxies, SSL termination and database tuning for reliability.",
+    "Cloud Infrastructure": "Small-to-medium cloud deployments and cost-conscious architecture.",
+    "Automation & Scripting (Python)": "Scripts for deployments, backups and data processing.",
+    "System Integrations": "APIs, EDI, payment connectors and hospital system integrations.",
+    "DevOps Basics": "CI/CD pipelines, container basics and automated testing practices.",
+  };
+  return map[skill] || "Experienced with this skill in production environments.";
+}
